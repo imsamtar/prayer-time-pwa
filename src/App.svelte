@@ -1,29 +1,93 @@
 <script lang="ts">
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
+  import { onMount } from "svelte";
+
+  let lat = 0;
+  let long = 0;
+
+  let data = JSON.parse(localStorage.getItem("data"));
+
+  onMount(fetchPrayerTime);
+
+  async function fetchPrayerTime() {
+    await new Promise((r) =>
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+        [lat, long] = [latitude, longitude];
+        r(undefined);
+      })
+    );
+
+    const date = new Date();
+    const response = await fetch(
+      `https://api.aladhan.com/v1/calendar?latitude=${lat}&longitude=${long}&method=10&month=${date.getMonth()}&year=${date.getFullYear()}`
+    );
+    const jsonResponse = await response.json();
+    const { data: _data } = jsonResponse;
+    data = _data.filter((day) => day.date.gregorian.day >= date.getDate());
+    localStorage.setItem("data", JSON.stringify(data));
+  }
+
+  function filterTime(timeString: string) {
+    return timeString.slice(0, timeString.indexOf("("));
+  }
 </script>
 
 <main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
-
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
+  {#if !data}
+    ...
+  {:else}
+    {#each data as day}
+      <div class="day">
+        <div class="date">{day.date.gregorian.date}</div>
+        <div class="time">
+          <h3>Imsak</h3>
+          {filterTime(day.timings.Imsak)}
+        </div>
+        <div class="time">
+          <h3>Fajr</h3>
+          {filterTime(day.timings.Fajr)}
+        </div>
+        <div class="time">
+          <h3>Sunrise</h3>
+          {filterTime(day.timings.Sunrise)}
+        </div>
+        <div class="time">
+          <h3>Dhuhr</h3>
+          {filterTime(day.timings.Dhuhr)}
+        </div>
+        <div class="time">
+          <h3>Asr</h3>
+          {filterTime(day.timings.Asr)}
+        </div>
+        <div class="time">
+          <h3>Maghrib</h3>
+          {filterTime(day.timings.Maghrib)}
+        </div>
+        <div class="time">
+          <h3>Isha</h3>
+          {filterTime(day.timings.Isha)}
+        </div>
+        <div class="time">
+          <h3>Midnight</h3>
+          {filterTime(day.timings.Midnight)}
+        </div>
+        <div class="time">
+          <h3>Sunset</h3>
+          {filterTime(day.timings.Sunset)}
+        </div>
+      </div>
+    {/each}
+  {/if}
 </main>
 
 <style>
   :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  }
+
+  :root::-webkit-scrollbar {
+    display: none;
   }
 
   main {
@@ -31,35 +95,23 @@
     padding: 1em;
     margin: 0 auto;
   }
-
-  img {
-    height: 16rem;
-    width: 16rem;
+  .day {
+    border: 2px solid red;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2rem;
+    margin: 0.5rem;
+    position: relative;
+    flex-wrap: wrap;
   }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
+  .date {
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0.5rem;
   }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
-
-    p {
-      max-width: none;
-    }
+  .time {
+    min-width: 120px;
+    border: red;
   }
 </style>
