@@ -43,7 +43,7 @@
           <h3>Imsak</h3>
           {filterTime(day.timings.Imsak)}
         </div>
-        <div class="time">
+        <div class="time prayer">
           <h3>Fajr</h3>
           {filterTime(day.timings.Fajr)}
         </div>
@@ -51,11 +51,11 @@
           <h3>Sunrise</h3>
           {filterTime(day.timings.Sunrise)}
         </div>
-        <div class="time">
+        <div class="time prayer">
           <h3>Dhuhr</h3>
           {filterTime(day.timings.Dhuhr)}
         </div>
-        <div class="time">
+        <div class="time prayer">
           <h3>Asr</h3>
           {filterTime(day.timings.Asr)}
         </div>
@@ -63,11 +63,11 @@
           <h3>Sunset</h3>
           {filterTime(day.timings.Sunset)}
         </div>
-        <div class="time">
+        <div class="time prayer">
           <h3>Maghrib</h3>
           {filterTime(day.timings.Maghrib)}
         </div>
-        <div class="time">
+        <div class="time prayer">
           <h3>Isha</h3>
           {filterTime(day.timings.Isha)}
         </div>
@@ -128,5 +128,9 @@
     min-width: 100px;
     border: 2px solid red;
     padding-bottom: 1rem;
+  }
+  .time.prayer {
+    background: #ff000099;
+    color: white;
   }
 </style>
