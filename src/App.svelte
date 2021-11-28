@@ -84,15 +84,22 @@
   :root {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
       Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
   }
 
   :root::-webkit-scrollbar {
     display: none;
   }
 
+  :global(body) {
+    padding: 0;
+    margin: 0;
+  }
+
   main {
     text-align: center;
-    padding: 1em;
+    padding: 0;
     margin: 0 auto;
   }
   .day {
@@ -100,18 +107,26 @@
     display: flex;
     justify-content: space-evenly;
     padding: 2rem;
+    padding-top: 4rem;
     margin: 0.5rem;
     position: relative;
     flex-wrap: wrap;
+    gap: 1rem;
+    overflow: hidden;
   }
   .date {
     position: absolute;
-    left: 0;
+    left: 50%;
     top: 0;
     padding: 0.5rem;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    width: 100%;
+    border-bottom: 2px solid red;
   }
   .time {
-    min-width: 120px;
-    border: red;
+    min-width: 100px;
+    border: 2px solid red;
+    padding-bottom: 1rem;
   }
 </style>
