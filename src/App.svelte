@@ -103,7 +103,7 @@
     margin: 0 auto;
   }
   .day {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     justify-content: space-evenly;
     padding: 0.5rem;
@@ -111,8 +111,7 @@
     margin: 0.5rem;
     position: relative;
     flex-wrap: wrap;
-    gap: 0.1rem;
-    overflow: hidden;
+    gap: 0.5rem;
   }
   .date {
     position: absolute;
@@ -121,8 +120,8 @@
     padding: 0.5rem;
     transform: translateX(-50%);
     font-size: 1.2rem;
-    width: 100%;
-    border-bottom: 2px solid red;
+    width: 90%;
+    border: 2px solid red;
   }
   .time {
     min-width: 100px;
