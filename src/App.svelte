@@ -107,7 +107,7 @@
     display: flex;
     justify-content: space-evenly;
     padding: 0.5rem;
-    padding-top: 4rem;
+    padding-top: 3rem;
     margin: 0.5rem;
     position: relative;
     flex-wrap: wrap;
@@ -126,11 +126,12 @@
   }
   .time {
     min-width: 100px;
-    border: 2px solid red;
+    border: 2px dashed #ff000099;
     padding-bottom: 1rem;
   }
   .time.prayer {
     background: #ff000099;
     color: white;
+    border-color: transparent;
   }
 </style>
