@@ -106,12 +106,12 @@
     border: 2px solid red;
     display: flex;
     justify-content: space-evenly;
-    padding: 2rem;
+    padding: 0.5rem;
     padding-top: 4rem;
     margin: 0.5rem;
     position: relative;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 0.1rem;
     overflow: hidden;
   }
   .date {
