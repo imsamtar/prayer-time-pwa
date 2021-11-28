@@ -60,6 +60,10 @@
           {filterTime(day.timings.Asr)}
         </div>
         <div class="time">
+          <h3>Sunset</h3>
+          {filterTime(day.timings.Sunset)}
+        </div>
+        <div class="time">
           <h3>Maghrib</h3>
           {filterTime(day.timings.Maghrib)}
         </div>
@@ -70,10 +74,6 @@
         <div class="time">
           <h3>Midnight</h3>
           {filterTime(day.timings.Midnight)}
-        </div>
-        <div class="time">
-          <h3>Sunset</h3>
-          {filterTime(day.timings.Sunset)}
         </div>
       </div>
     {/each}
