@@ -1,8 +1,11 @@
+const CACHE_NAME = 'pwa-cache'
+
 self.addEventListener('install', function (event) {
   // Perform install steps
 })
 
 self.addEventListener('fetch', function (event) {
+  if (!event.request.url.startsWith('http')) return
   event.respondWith(
     caches.match(event.request).then(function (response) {
       // Cache hit - return response

@@ -4,7 +4,7 @@
   "description": "Prayer Time",
   "icons": [
     {
-      "src": "/images/icons-512.png",
+      "src": "/svelte.png",
       "type": "image/png",
       "sizes": "512x512"
     }
